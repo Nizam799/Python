@@ -25,7 +25,7 @@ SECRET_KEY = 'exhlfdat&vfum(-34*c2uroi(($ww(yo$9pv98=e6p^gl(-eoj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['20.169.224.172']
+ALLOWED_HOSTS = ['app11-b2eqe2fhh2gha4cy.centralindia-01.azurewebsites.net']
 
 
 # Application definition
