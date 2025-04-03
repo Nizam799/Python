@@ -21,7 +21,7 @@ stages:
             displayName: Login to Docker Hub
             inputs:
               command: login
-              containerRegistry: 'DockerHub_Service_Connection'  # Name of your Docker Hub service connection
+              containerRegistry: 'Azure-Dev-Py-Doc'  # Name of your Docker Hub service connection
 
           # Build and push to Docker Hub
           - task: Docker@2
@@ -43,8 +43,8 @@ stages:
           - script: |
               ssh $(VM_USERNAME)@$(VM_IP) "
                 docker pull $(DOCKERHUB_REPO):latest
-                docker stop python-app || true
-                docker rm python-app || true
-                docker run -d -p 80:8000 --name python-app $(DOCKERHUB_REPO):latest
+                docker stop docker-repo1 || true
+                docker rm docker-repo1 || true
+                docker run -d -p 80:8000 --name $(DOCKERHUB_REPO):latest
               "
             displayName: 'SSH and Run Container'
