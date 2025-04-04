@@ -45,6 +45,6 @@ stages:
                 docker pull $(DOCKERHUB_REPO):latest
                 docker stop docker-repo1 || true
                 docker rm docker-repo1 || true
-                docker run -d -p 80:8000 --name $(DOCKERHUB_REPO):latest
+                docker run -d -p 8000:8000 --name $(DOCKERHUB_REPO):latest
               "
             displayName: 'SSH and Run Container'
