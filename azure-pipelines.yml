@@ -39,7 +39,7 @@ stages:
               command: buildAndPush
               repository: $(DOCKERHUB_REPO)
               dockerfile: '**/Dockerfile'
-              tags: 'latest'
+              tags: 'test'
 
   - stage: DeployToVM
     displayName: Deploy to Ubuntu VM
@@ -51,12 +51,12 @@ stages:
         steps:
           - script: |
               ssh $(VM_USERNAME)@$(VM_IP) "
-                docker pull $(DOCKERHUB_REPO):latest
+                docker pull $(DOCKERHUB_REPO):test
                 docker stop $(CONTNAME) || true
                 docker rm $(CONTNAME) || true
                 docker run -d -p 8000:8000 \
                  --name $(CONTNAME) \
                  -e IPADD='$(IPADD)' \
-                 $(DOCKERHUB_REPO):latest
+                 $(DOCKERHUB_REPO):test
               "
             displayName: 'SSH and Run Container'
