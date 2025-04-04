@@ -1,11 +1,19 @@
 trigger:
   - main  # Runs on changes to the main branch
+resources:
+  repositories:
+  - repository: self
+    type: git
+    name: Devops Project
+    ref: main
+    public: true  # 👈 Explicitly declare as public
 
 variables:
   DOCKERHUB_REPO: 'nizam799/docker-repo1'  # Format: <username>/<repo>
   VM_IP: '20.169.224.172'            # Replace with your VM's IP
   VM_USERNAME: 'snp'      # SSH username
   IPADD: '*'
+  CONTNAME: 'crono'
 
 stages:
   - stage: BuildAndPush
@@ -44,10 +52,10 @@ stages:
           - script: |
               ssh $(VM_USERNAME)@$(VM_IP) "
                 docker pull $(DOCKERHUB_REPO):latest
-                docker stop docker-repo1 || true
-                docker rm docker-repo1 || true
+                docker stop $(CONTNAME) || true
+                docker rm $(CONTNAME) || true
                 docker run -d -p 8000:8000 \
-                 --name docker-repo1 \
+                 --name $(CONTNAME) \
                  -e IPADD='$(IPADD)' \
                  $(DOCKERHUB_REPO):latest
               "
