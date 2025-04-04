@@ -5,7 +5,7 @@ resources:
   - repository: self
     type: git
     name: Devops Project
-    ref: main
+    ref: main # referring it to main branch
     public: true  # 👈 Explicitly declare as public
 
 variables:
