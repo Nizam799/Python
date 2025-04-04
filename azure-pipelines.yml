@@ -5,6 +5,7 @@ variables:
   DOCKERHUB_REPO: 'nizam799/docker-repo1'  # Format: <username>/<repo>
   VM_IP: '20.169.224.172'            # Replace with your VM's IP
   VM_USERNAME: 'snp'      # SSH username
+  IPADD: '*'
 
 stages:
   - stage: BuildAndPush
