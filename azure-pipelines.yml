@@ -14,7 +14,7 @@ variables:
   VM_USERNAME: 'snp'      # SSH username
   IPADD: '*'
   CONTNAME: 'cronto'
-  VERSION: 'test'
+  VERSION: 'testV2'
 
 stages:
   - stage: BuildAndPush
@@ -42,22 +42,25 @@ stages:
               dockerfile: '**/Dockerfile'
               tags: $(VERSION)
 
-  # - stage: DeployToVM
-  #   displayName: Deploy to Ubuntu VM
-  #   dependsOn: BuildAndPush
-  #   jobs:
-  #     - job: Deploy
-  #       pool:
-  #         vmImage: 'ubuntu-latest'
-  #       steps:
-  #         - script: |
-  #             ssh $(VM_USERNAME)@$(VM_IP) "
-  #               docker pull $(DOCKERHUB_REPO):$(VERSION)
-  #               docker stop $(CONTNAME) || true
-  #               docker rm $(CONTNAME) || true
-  #               docker run -d -p 8000:8000 \
-  #                --name $(CONTNAME) \
-  #                -e IPADD='$(IPADD)' \
-  #                $(DOCKERHUB_REPO):$(VERSION)
-  #             "
-  #           displayName: 'SSH and Run Container'
+  - stage: DeployToVM
+    displayName: Deploy to Ubuntu VM
+    dependsOn: BuildAndPush
+    jobs:
+      - job: Deploy
+        pool:
+          name: 'Crontovmagent'
+        steps:
+        - task: SSH@0
+          inputs:
+            sshEndpoint: 'SSHPOINT'
+            runOptions: 'commands'
+            commands: |
+                docker pull $(DOCKERHUB_REPO):$(VERSION)
+                docker stop $(CONTNAME) || true
+                docker rm $(CONTNAME) || true
+                docker run -d -p 8000:8000 \
+                 --name $(CONTNAME) \
+                 -e IPADD='$(IPADD)' \
+                 $(DOCKERHUB_REPO):$(VERSION)
+              
+          displayName: 'SSH and Run Container'
