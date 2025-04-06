@@ -22,7 +22,7 @@ stages:
     jobs:
       - job: Build
         pool:
-          vmImage: 'ubuntu-latest'
+          name: 'Crontovmagent'
         steps:
           - checkout: self  # Pulls code from Azure Repos
 
