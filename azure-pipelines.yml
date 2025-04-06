@@ -55,12 +55,12 @@ stages:
             sshEndpoint: 'SSHPOINT'
             runOptions: 'commands'
             commands: |
-                docker pull $(DOCKERHUB_REPO):$(VERSION)
+                docker pull $(DOCKERHUB_REPO):$(VERSION) || echo "Pull Failed"
                 docker stop $(CONTNAME) || true
                 docker rm $(CONTNAME) || true
                 docker run -d -p 8000:8000 \
                  --name $(CONTNAME) \
                  -e IPADD='$(IPADD)' \
-                 $(DOCKERHUB_REPO):$(VERSION)
+                 "$(DOCKERHUB_REPO):$(VERSION)"
               
           displayName: 'SSH and Run Container'
