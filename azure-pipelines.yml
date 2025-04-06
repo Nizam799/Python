@@ -58,6 +58,6 @@ stages:
                 docker pull $(DOCKERHUB_REPO):$(VERSION) || echo "Pull Failed"
                 docker stop $(CONTNAME) 2>/dev/null || echo "No Container to stop"
                 docker rm $(CONTNAME) 2>/dev/null || echo "No container to remove"
-                docker run -d --restar unless-stopped -p 8000:8000 --name $(CONTNAME) -e IPADD='$(IPADD)' $(DOCKERHUB_REPO):$(VERSION)
+                docker run -d --restart unless-stopped -p 8000:8000 --name $(CONTNAME) -e IPADD='$(IPADD)' $(DOCKERHUB_REPO):$(VERSION)
               
           displayName: 'SSH and Run Container'
