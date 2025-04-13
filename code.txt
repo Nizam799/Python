@@ -1,8 +1,0 @@
-Hi this is new file
-Second line after git add
-third line
-fourth line
-fffff
-sixx
-seven
-eight
