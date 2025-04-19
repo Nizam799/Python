@@ -25,7 +25,7 @@ SECRET_KEY = 'exhlfdat&vfum(-34*c2uroi(($ww(yo$9pv98=e6p^gl(-eoj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.getenv("IPADD", "0.0.0.0,localhost").split(",")
+ALLOWED_HOSTS = [os.getenv('WEBSITE_HOSTNAME')] + os.getenv("IPADD", "0.0.0.0,localhost").split(",")
 
 
 # Application definition
