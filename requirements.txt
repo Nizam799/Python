@@ -7,3 +7,5 @@ Pillow
 pytz
 requests
 urllib3
+azure-identity
+azure-keyvault-secrets
