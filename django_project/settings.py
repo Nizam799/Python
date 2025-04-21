@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-from azure.identity import DefaultAzureCredential
+from azure.identity import ManagedIdentityCredential
 from azure.keyvault.secrets import SecretClient
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = 'exhlfdat&vfum(-34*c2uroi(($ww(yo$9pv98=e6p^gl(-eoj'
 
 # Initialize credentials - automatically uses managed identity or local dev credentials
-credential = DefaultAzureCredential()
+credential = ManagedIdentityCredential(client_id="0cff2f80-b5a8-406f-95b2-8720a31fadd9")
 
 # Create the SecretClient
 keyvault_url = "https://vault9.vault.azure.net/"
